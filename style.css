@@ -118,12 +118,56 @@ nav a:hover{color:var(--blue)}
 }
 .card.tall{grid-column:span 5}
 .card.wide{grid-column:span 7}
-.card img{
-  width:100%;height:330px;object-fit:contain;
-  padding:20px;background:#0a0a0a;
+.studio-surface{
+  position:relative;
+  width:100%;
+  height:330px;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:22px;
+  background:
+    radial-gradient(circle at 50% 28%, rgba(255,255,255,.18) 0%, rgba(255,255,255,0) 34%),
+    linear-gradient(180deg, rgba(255,255,255,.05) 0%, rgba(0,0,0,.02) 100%),
+    url("assets/portfolio-texture-bg.jpg") center center / cover no-repeat;
 }
-.card.tall img,.card.wide img{height:390px}
-.card.cinematic-card img{object-fit:cover;padding:0}
+.studio-surface:before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.06) 0%, rgba(255,255,255,0) 20%),
+    radial-gradient(circle at 50% 100%, rgba(0,0,0,.10) 0%, rgba(0,0,0,0) 42%);
+  pointer-events:none;
+}
+.studio-surface:after{
+  content:"";
+  position:absolute;
+  left:10%;
+  right:10%;
+  bottom:11%;
+  height:14%;
+  border-radius:50%;
+  background:rgba(0,0,0,.28);
+  filter:blur(18px);
+}
+.studio-surface img{
+  position:relative;
+  z-index:2;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  filter:drop-shadow(0 16px 18px rgba(0,0,0,.22));
+}
+.card.tall .studio-surface,.card.wide .studio-surface{height:390px}
+.card.cinematic-card>img{
+  width:100%;
+  height:390px;
+  object-fit:cover;
+  padding:0;
+  background:none;
+}
 .card-copy{padding:18px}
 .card-copy h3{margin:0 0 5px;font-size:15px}
 .card-copy p{margin:0;color:#7c8286;font-size:12px}
@@ -149,9 +193,16 @@ nav a:hover{color:var(--blue)}
 .showcase-grid{
   display:grid;grid-template-columns:repeat(3,1fr);gap:18px;
 }
-.showcase-grid img{
-  width:100%;height:380px;object-fit:contain;
-  background:#080808;padding:22px;
+.showcase-surface{
+  height:380px;
+  padding:24px;
+  border:1px solid rgba(0,0,0,.10);
+  box-shadow:0 1px 0 rgba(255,255,255,.35) inset;
+}
+.showcase-surface img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
 }
 
 .split-band{
@@ -196,9 +247,9 @@ footer{
   .section,.dark-section,.split-copy{padding:70px 6vw}
   .work-grid{grid-template-columns:1fr}
   .card,.card.tall,.card.wide{grid-column:auto}
-  .card img,.card.tall img,.card.wide img{height:320px}
+  .studio-surface,.card.tall .studio-surface,.card.wide .studio-surface,.card.cinematic-card>img{height:320px}
   .showcase-grid{grid-template-columns:1fr}
-  .showcase-grid img{height:360px}
+  .showcase-surface{height:360px}
   .contact{flex-direction:column;align-items:flex-start;padding:80px 6vw}
   footer{padding:25px 6vw}
 }
@@ -209,6 +260,77 @@ footer{
   .hero-copy{padding-top:58px}
   .hero-art{min-height:300px}
   .section,.dark-section,.split-copy{padding:56px 5vw}
-  .card img,.card.tall img,.card.wide img,.showcase-grid img{height:260px}
+  .studio-surface,.card.tall .studio-surface,.card.wide .studio-surface,.card.cinematic-card>img,.showcase-surface{height:260px}
   footer{flex-direction:column}
+}
+
+
+
+/* tighter, more intentional product framing */
+.studio-surface{
+  padding:14px;
+}
+
+.studio-surface img{
+  transition:transform .25s ease;
+  transform-origin:center center;
+}
+
+.zoom-pair img{
+  transform:scale(1.18) translateY(6px);
+}
+.zoom-speaker img{
+  transform:scale(1.20) translateY(10px);
+}
+.zoom-amp img{
+  transform:scale(1.13) translateX(-10px) translateY(6px);
+}
+.zoom-system img{
+  transform:scale(1.12) translateY(6px);
+}
+.zoom-speaker-dark img{
+  transform:scale(1.22) translateY(10px);
+}
+.zoom-speaker-silver img{
+  transform:scale(1.19) translateY(10px);
+}
+.zoom-panel img{
+  transform:scale(1.28) translateY(8px);
+}
+
+.card{
+  box-shadow:0 10px 24px rgba(0,0,0,.04);
+}
+
+.card-copy{
+  padding:18px 18px 20px;
+}
+
+.showcase-grid{
+  align-items:stretch;
+}
+
+.showcase-surface{
+  padding:16px;
+}
+
+@media (max-width:900px){
+  .zoom-pair img,
+  .zoom-speaker img,
+  .zoom-amp img,
+  .zoom-system img,
+  .zoom-speaker-dark img,
+  .zoom-speaker-silver img,
+  .zoom-panel img{
+    transform:scale(1.08) translateY(4px);
+  }
+}
+
+@media (max-width:560px){
+  .studio-surface{
+    padding:10px;
+  }
+  .showcase-surface{
+    padding:10px;
+  }
 }
